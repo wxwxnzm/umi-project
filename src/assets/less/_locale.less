@@ -1,0 +1,106 @@
+
+:global{
+    .df {
+        display: -webkit-box; // ios 6-,safari3-6
+        display: -moz-box; // ff19-
+        display: -ms-flexbpx; // IE10
+        display: -webkit-flex;
+        display: flex;
+        &.h-center{
+             /* 09版 */
+            -webkit-box-pack: center;
+            /* 12版 */
+            -webkit-justify-content: center;
+            -moz-justify-content: center;
+            -ms-justify-content: center;
+            -o-justify-content: center;
+            justify-content: center;
+    
+        }
+        &.v-center {
+            /* 09版 */
+            -webkit-box-align: center;
+            /* 12版 */
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-align-items: center;
+            -o-align-items: center;
+            align-items: center;
+        }
+        &.h-between {
+            justify-content: space-between;
+        }
+        &.fw {
+            flex-wrap: wrap;
+        }
+        &.h-right {
+            flex-direction: row-reverse
+        }
+        &.v-column {
+            flex-direction: column;
+        }
+    }
+    .db {
+        display: block;
+    }
+    .di {
+        display: inline;
+    }
+    .dn {
+        display: none;
+    }
+    .dib {
+        display: inline-block;
+    }
+    .tc {
+        text-align: center;
+    }
+    .tr {
+        text-align: right;
+    }
+    .tl {
+        text-align: left;
+    }
+    .r {
+        float: right;
+    }
+    .abs {
+        position: absolute;
+    }
+    .rel {
+        position: relative;
+    }
+    .fix {
+        position: fixed;
+    }
+    .vtt {
+        vertical-align: text-top;
+    }
+    .vt {
+        vertical-align: top;
+    }
+    .vm {
+        vertical-align: middle;
+    }
+    .vs {
+        vertical-align: sub;
+    }
+    .ovh {
+        overflow: hidden;
+    }
+    .ovs {
+        overflow: scroll;
+    }
+    .y-scroll {
+        overflow-y: scroll;
+    }
+    .tr3d {
+        transform: translate3d(0,0,0)
+    }
+    .abs-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}

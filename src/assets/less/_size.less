@@ -1,0 +1,87 @@
+.Loop(@key, @v, @unit, @list, @i: 1) when (@i <= length(@list)) {
+    @item: extract(@list, @i);
+    .@{key}@{item} {
+      @{v}: @item + @unit;
+    }
+    .Loop(@key, @v, @unit, @list, @i + 1);
+  }
+  .Loop2(@key, @v, @unit, @list, @i: 1) when (@i <= length(@list)) {
+    @item: extract(@list, @i);
+    .@{key}@{item} {
+      @{v}: @item/10+@unit;
+    }
+    .Loop(@key, @v, @unit, @list, @i + 1);
+  }
+  
+  @paddingRightMap: 40;
+  @paddingLeftMap: 20 40;
+  @paddingTopMap: 20;
+  @paddingBottomMap: 20;
+  @paddingMap: 20 40;
+  
+  @fontSizeMap: 12 13 14 15 16 17 18 20 24 28 30 36;
+  @fontWeightMap: 500 600 700;
+  @lineHeightMap: 14 18 20 24 28 36 40 44 45 56;
+  @widthMap: 48 52 100 170 190;
+  @heightMap: 2 126 170 190;
+  @widthPrecentMap: 100 200;
+  @heightPrecentMap: 100;
+  
+  // @colorMap: #1E1D22 red;
+  
+  @marginRightMap: -40 -18 -15 -5 2 6 7 8 10 12 15 20 22 30 32 36 60 80;
+  @marginLeftMap: 40;
+  @marginTopMap: 2 5 8 10 12 14 15 20 25 28 30 40 50 80;
+  @marginBottomMap: 5 6 8 10 12 15 20 24 25 30 40 70 90 100 400;
+  // @mbMap: 10 16;
+  // @lhMap: 12 13;
+  // @ziMap: 1;
+  // @widthMap: 136;
+  // @heightMap: 12;
+  // @borderRadiusMap: 3;
+  @bottomMap: 0 75;
+  @rightMap: -15 0 ;
+  @topMap: -35 0;
+  @leftMap: 0  6 12 20 270 380 400 420 675;
+  
+  @flexValMap: 1;
+  
+  
+  @opacityMap: 4;
+  @transitionDurationMap: 2;
+  @zIndexMap: 1 100 999;
+  
+  @borderRadiusMap: 4 10 27;
+  
+  @color_v2: RGBA(51, 99, 252, 0.2);
+  @color_v2_hover: RGBA(51, 99, 252, 0.3);
+  
+  :global{
+    .Loop(fs, font-size, 0px, @fontSizeMap);
+    .Loop(fw, font-weight, 0, @fontWeightMap);
+    .Loop(lh, line-height, 0px, @lineHeightMap);
+    .Loop(w, width, 0px, @widthMap);
+    .Loop(h, height, 0px, @heightMap);
+    .Loop(wp, width, 0%, @widthPrecentMap);
+    .Loop(hp, height, 0%, @heightPrecentMap);
+    .Loop(pl, padding-left, 0px,@paddingLeftMap);
+    .Loop(pr, padding-right, 0px, @paddingRightMap);
+    .Loop(pt, padding-top, 0px, @paddingTopMap);
+    .Loop(pb, padding-bottom, 0px, @paddingBottomMap);
+    .Loop(p, padding, 0px, @paddingMap);
+    .Loop(b, bottom, 0px, @bottomMap);
+    .Loop(t, top, 0px, @topMap);
+    .Loop(l, left, 0px, @leftMap);
+    .Loop(r, right, 0px, @rightMap);
+    .Loop(mr, margin-right, 0px, @marginRightMap);
+    .Loop(ml, margin-left, 0px, @marginLeftMap);
+    .Loop(mt, margin-top, 0px, @marginTopMap);
+    .Loop(mb, margin-bottom, 0px, @marginBottomMap);
+    .Loop(flex-, flex, 0, @flexValMap);
+    .Loop(br, border-radius, 0px, @borderRadiusMap);
+    .Loop(zi, z-index, 0, @zIndexMap);
+  
+    .Loop2(op-, opacity, 0, @opacityMap);
+    .Loop2(tr-, transition-duration, 0s, @transitionDurationMap);
+    
+  }

@@ -1,0 +1,36 @@
+@import './_size.less';
+@import './_locale.less';
+@import './_color.less';
+// @import './_ui.less';
+@import './_reset.less';
+
+
+.theme (@mainColor: #62caff) {
+    :global {
+        .list {
+            background-color: #fff;
+            .navbar{
+              background-color: @mainColor;
+              color: white;
+              .am-icon-md{
+                width: 0.6rem;
+                height: 0.6rem;
+              }
+              .am-navbar-left{
+                padding-left: 0;
+                >span{
+                  font-size: @fontSizeBig;
+                }
+              }
+              .am-navbar-title{
+                color: white;
+              }
+              .am-navbar-left-icon {
+                margin-right: 0;
+              }
+            }
+          }
+    }
+    
+}
+

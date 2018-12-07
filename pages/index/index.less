@@ -1,0 +1,27 @@
+@import '../../src/assets/less/index.less';
+// 默认 蓝色
+
+
+/*声明 思源字体-Regular*/
+@font-face {
+  font-family: 'siyuanHei';
+  src: url('https://pingtai-prd.oss-cn-shenzhen.aliyuncs.com/frontend-static/NotoSansHans-Regular.otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:global {
+  #root {
+      font-family: "PingFang SC", "siyuanHei", Helvetica, Arial, "宋体";
+  }
+}
+
+:global {
+  .themeBlue {
+    .theme();
+  }
+  .themeRed {
+    .theme(#9e2f38);
+  }
+}
+
