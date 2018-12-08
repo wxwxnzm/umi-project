@@ -49,6 +49,7 @@ export const getWechatDetail = async (params) => {
               console.log(data, 'data')
               return data;
           } else {
+              return {}
             //   console.log(resultCode, 'resultCode')
             // Toast.fail(resultMessage || '获取留言失败')
           }

@@ -50,7 +50,7 @@ export default {
   },
 };
 
-function getList(content) {
+function getList(content = '') {
 // 111111<div><br></div><div>2222222</div><video src="https://pingtai-uat.oss-cn-shenzhen.aliyuncs.com/0a10c0ea-c6b6-4fab-a26c-02af5c7996f4.mp4" ></video><img src="https://oss-uat.xuebangsoft.net/788b34be-0276-4c24-8e5a-602dac423bdd.jpg" ></img>
   var list = [];
   content = content.replace(/((<video.*?src="(.*?)".*?\/?>(<\/video>)?)|(<img.*?src="(.*?)"(.*?)>(<\/img>)?))/g, function(type, a, b, c, d, f, g, h){

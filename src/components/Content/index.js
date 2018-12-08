@@ -34,13 +34,13 @@ class App extends React.Component {
         if (isiOS) {
             this.isiOS = true;
             await this.loadAli();
-            this.iosInit();
-            console.log(this.autoFocusInst.textareaRef.classList.add('needsclick'))
+            this.autoFocusInst.textareaRef.classList.add('needsclick')
         } else if (isAndroid) {
             this.isAndroid = true;
             this.bindAndroidPickUp();
         }
-            this.autoFocusInst.focus();
+        this.inputBind();
+        this.autoFocusInst.focus();
     }
     async loadAli() {
         const isCommonJsDone = await loadJs('/eduboss/components/aliyun-oss-sdk-4.4.4/aliyun-oss-sdk-4.4.4.min.js');
@@ -49,14 +49,7 @@ class App extends React.Component {
         Toast.fail('加载阿里云资源资源出错');
         }
     }
-    iosInit() {
-        // var notNeed = fastClick.notNeeded(document.body);
-        // $.fn.triggerFastClick=function(){
-        //     this.trigger("click");
-        //     if(!notNeed){
-        //         this.trigger("click");
-        //     }
-        // }
+    inputBind() {
         this.$inputVideo.addEventListener('change', async(e)=>{
             const {aliPath} = this.props;
             Toast.loading('正在上传');
@@ -342,7 +335,7 @@ function mapStateToProps({detail}) {
 }
 export default connect(mapStateToProps)(App);
   
-function addTag(content, list) {
+function addTag(content = '', list) {
     let tags = ''
     list.map((item)=>{
         if (item.type === 'video') {
