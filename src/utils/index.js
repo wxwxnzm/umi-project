@@ -80,3 +80,23 @@ export const loadJs  = (src) => {
       }
   })
 }
+
+export const getWH = async (url) => {
+  return new Promise((resolve,reject)=> {
+    const img = new window.Image();
+    img.src = url;
+    img.onload = () => {
+      // 拿图片宽高
+      const r = img.naturalWidth / img.naturalHeight;
+      const width = document.body.clientWidth;
+      const height = parseFloat(document.body.clientWidth / r).toFixed(2);
+      resolve({
+        width,
+        height
+      })
+    };
+    img.onerror = () => {
+      reject({})
+    }
+  })
+};

@@ -7,7 +7,6 @@ export default {
     // base: '/admin/',
     // publicPath: 'http://cdn.com/foo',
     // D:\idea\eduboss-platform\src\main\webapp\app\h5app\student
-    outputPath: '../../../idea/eduboss-platform/src/main/webapp/app/h5app/student/studentCommentEditor/',
     plugins: [
       ['umi-plugin-react', {
         dva: true,

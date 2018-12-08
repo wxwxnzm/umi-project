@@ -1,9 +1,10 @@
 
 import {connect} from 'dva';
 import fastClick from 'fastClick';
+import { PhotoSwipe } from 'react-photoswipe';
 import {Toast, TextareaItem, Modal} from 'antd-mobile';
-import {Player} from 'video-react';
-import {loadJs, historyBackWithAnimation} from 'utils';
+// import {Player} from 'video-react';
+import {loadJs, historyBackWithAnimation, getWH} from 'utils';
 import {getAliConfigAndPostFiles, updateCommentApp, addCommentApp, updateCommentWechat, addCommentWechat} from 'services';
 import delIcon from 'assets/img/del.svg';
 import imageIcon from 'assets/img/image.svg';
@@ -12,14 +13,17 @@ import publishIcon from 'assets/img/publish.svg';
 import noPublishIcon from 'assets/img/publish-no-allow.svg';
 import videoPlayIcon from 'assets/img/video-play.svg';
 
-import "video-react/dist/video-react.css"; 
+// import "video-react/dist/video-react.css"; 
+import 'react-photoswipe/lib/photoswipe.css';
 import styles from './index.less';
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             visible: false,
-            curVideoUrl: ''
+            curVideoUrl: '',
+            photoSwipeItems: [],
+            isOpen: false
         };
       }
     // 生命周期:挂载
@@ -121,13 +125,13 @@ class App extends React.Component {
             }
     }
     toPublish = async() => {
-        const {id, cmtId, replyFromId, content, list, token, from} = this.props;
+        const {id, cmtId, replyFromId, content, list = [], token, from, commentId} = this.props;
         console.log(replyFromId, 're')
         if (list.length ==0 && content === '') {
             return Toast.info('请输入留言内容或者添加图片/视频', 2);
         }
         var params = {
-            stuCommentManageId: cmtId,
+            stuCommentManageId: cmtId || commentId,
             content: addTag(content, list),
             replyFromId,
             token
@@ -215,9 +219,18 @@ class App extends React.Component {
     play(url) {
         this.setState({visible: true, curVideoUrl: url})
     }
+    preview = async (url) => {
+        const {width, height} = await getWH(url);
+        this.setState({
+            photoSwipeItems: [{w: width, h: height, src: url}],
+            isOpen: true
+        })
+    }
     imageRender = (item, index)=> {
         return <div key={index} className="rel w190 h190">
-            <div  className="w170 h170  df v-center h-center ovh">
+            <div  className="w170 h170  df v-center h-center ovh" onClick={()=> {
+                this.preview(item.url)
+            }}>
                 <img  className="wp100" src={item.url}/>
             </div>
             <div className="p20 abs t-35 r-15"  onClick={()=>{
@@ -227,13 +240,16 @@ class App extends React.Component {
     }
     videoRender = (item, index)=> {
         return <div key={index} className="rel w190 h190">
-            <img className="w200" src={item.url + '?spx&amp;x-oss-process=video/snapshot,t_100,f_jpg'}/>
-            <img src={videoPlayIcon} onClick={()=>{
-                this.play(item.url)
-            }} className="abs-center" alt=""/>
+            <div  className="w170 h170  df v-center h-center ovh rel">
+                <img className="wp100" src={item.url + '?spx&x-oss-process=video/snapshot,t_100,f_jpg'}/>
+                <img src={videoPlayIcon} onClick={()=>{
+                    this.play(item.url)
+                }} className="abs-center" alt=""/>
+            </div>
             <div className="p20 abs t-35 r-15"  onClick={()=>{
-                    this.delItem(item)
-                }}><img src={delIcon} alt=""/></div>
+                        this.delItem(item)
+                    }}><img src={delIcon} alt=""/></div>
+            
         </div>
     }
     
@@ -241,9 +257,21 @@ class App extends React.Component {
         const {list} = this.props;
         this.set('list', list.filter(i=>i!==item));
     }
+    handleClose = () => {
+        this.setState({
+          isOpen: false,
+        });
+      };
     render() {
-        const {visible, curVideoUrl} = this.state;
+        const {visible, curVideoUrl, photoSwipeItems, isOpen} = this.state;
         const {content, list = []} = this.props;
+        const options = {
+            index: 0,
+            fullscreenEl: false,
+            // 点击图片关闭
+            tapToClose: true,
+            shareEl: false,
+          };
         return (
             <>
                 <div className="df h-between v-center h126 bg-white">
@@ -295,11 +323,13 @@ class App extends React.Component {
                         <video 
                         className="wp100 ovh" style={{height: '6rem'}}
                         controls="controls"
-                        poster={curVideoUrl + '?spx&amp;x-oss-process=video/snapshot,t_100,f_jpg'}
+                        poster={curVideoUrl + '?spx&x-oss-process=video/snapshot,t_100,f_jpg'}
                         src={curVideoUrl}></video>
                     </div>
-                    
                 </Modal>
+                {!photoSwipeItems || photoSwipeItems && photoSwipeItems.length > 0 &&
+                    <PhotoSwipe isOpen={isOpen} items={photoSwipeItems || []} options={options} onClose={this.handleClose} />
+                }
             </>
         )
     }
