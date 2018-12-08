@@ -97,7 +97,7 @@ class App extends React.Component {
         window.android.nativeUploadFiles(params); // 拿不到files格式，走app上传
         }
         window.nativeGetVideoCallback = function(videoData) {
-            const {aliPath} = this.props;
+            
             var stringify = JSON.stringify(videoData),
             paramsObj = eval('(' + stringify + ')') || {},
             videoPath = paramsObj.videoPath;
@@ -107,10 +107,10 @@ class App extends React.Component {
                 });
             Toast.loading('正在上传');
             window.android.nativeUploadFiles(params); // 拿到本地文件地址
-            }
-            window.nativeFilesAliPathCallback = (resData) => { // app上传后执行
+        }
+        window.nativeFilesAliPathCallback = (resData) => { // app上传后执行
             console.log(resData, 'resData');
-        
+            const {aliPath} = this.props;
             var stringify = JSON.stringify(resData),
                 paramsObj = eval('(' + stringify + ')') || {},
                 itemId = paramsObj.itemId,

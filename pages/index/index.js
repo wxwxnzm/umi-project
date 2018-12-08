@@ -12,7 +12,7 @@ class App extends React.Component {
     dispatch({
       type: 'detail/get',
     });
-    // new vconsole();
+    new vconsole();
     
   }
   render() {
