@@ -16,7 +16,7 @@ class App extends React.Component {
 
     } else {
       console.log(process.env.UMI_ENV, 'process.env.UMI_ENV')
-      new vconsole();
+      // new vconsole();
     }
     
   }
