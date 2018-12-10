@@ -1,7 +1,8 @@
 {
   "scripts": {
     "start": "umi dev",
-    "build": "set UMI_ENV=prod&&umi build"
+    "test": "set UMI_ENV=test&&set ANALYZE=1&umi build",
+    "build": "set UMI_ENV=prod&&set ANALYZE=1&umi build"
   },
   "dependencies": {
     "autoprefixer": "^9.4.2",

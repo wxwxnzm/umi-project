@@ -10,17 +10,17 @@ let routes = [
   {
     "path": "/index.html",
     "exact": true,
-    "component": require('../index/index.js').default
+    "component": dynamic({ loader: () => import('../index/index.js') })
   },
   {
     "path": "/",
     "exact": true,
-    "component": require('../index/index.js').default
+    "component": dynamic({ loader: () => import('../index/index.js') })
   },
   {
     "path": "/studyCommentDetailEditor2.html",
     "exact": true,
-    "component": require('../studyCommentDetailEditor2/index.js').default
+    "component": dynamic({ loader: () => import('../studyCommentDetailEditor2/index.js') })
   },
   {
     "component": () => React.createElement(require('D:/gjx_work/project/xb-mobile/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'pages', hasRoutesInConfig: false })

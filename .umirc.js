@@ -4,9 +4,6 @@ const pxtorem = require('postcss-pxtorem');
 const autoprefixer = require('autoprefixer')
 const src = path.resolve(__dirname, 'src');
 export default {
-    // base: '/admin/',
-    // publicPath: 'http://cdn.com/foo',
-    // D:\idea\eduboss-platform\src\main\webapp\app\h5app\student
     plugins: [
       ['umi-plugin-react', {
         dva: true,
@@ -14,6 +11,11 @@ export default {
         dll: {
             exclude: ['src']
         },
+        // dynamicImport: {
+        //     webpackChunkName: true,
+        // },
+        dynamicImport: true,
+        chunks: ['vendors', 'umi'],
         // hardSource: true,
         fastClick: true,
         routes: {
@@ -22,33 +24,10 @@ export default {
           ],
         },
       }],
+      ['./customPlugin.js', {name: 'app'}]
     ],
     hash: true,
     exportStatic: {htmlSuffix: true},
-    // chainWebpack(config, { webpack }) {
-    //     config.merge({
-    //       plugin: {
-    //         install: {
-    //           plugin: require('uglifyjs-webpack-plugin'),
-    //           args: [{
-    //             sourceMap: false,
-    //             uglifyOptions: {
-    //               compress: {
-    //                 // 删除所有的 `console` 语句
-    //                 // drop_console: true,
-    //               },
-    //               output: {
-    //                 // 最紧凑的输出
-    //                 beautify: false,
-    //                 // 删除所有的注释
-    //                 comments: false,
-    //               },
-    //             }
-    //           }]
-    //         }
-    //       }
-    //     })
-    // },
     theme: "./theme.config.js",
     cssLoaderOptions: {
         // context: 'src', 
@@ -57,17 +36,10 @@ export default {
             new CleanCSSPlugin({ advanced: true })
         ]
     },
-    // cssModulesExcludes: ['src/assets/css/am.css'],
-    // lessLoaderOptions: {
-    //     importLoaders: 1,
-    //     modules: true,
-    //     sourceMap: true,
-    //     context: 'src', 
-    //     localIdentName: "[local]_[hash:base64:8]",
-    //     plugins: [
-    //         new CleanCSSPlugin({ advanced: true })
-    //     ]
-    // },
+    define: {
+        // 添加这个自定义的环境变量
+        "process.env.UMI_ENV": process.env.UMI_ENV, // * 本地开发环境：dev，测试服：test，正式服：prod
+    },
     alias: {
         SRC: src,
         assets: path.resolve(src, 'assets'),

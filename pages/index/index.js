@@ -12,7 +12,12 @@ class App extends React.Component {
     dispatch({
       type: 'detail/get',
     });
-    new vconsole();
+    if (process.env.UMI_ENV === 'prod') {
+
+    } else {
+      console.log(process.env.UMI_ENV, 'process.env.UMI_ENV')
+      new vconsole();
+    }
     
   }
   render() {
