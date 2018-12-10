@@ -33,12 +33,12 @@ class App extends React.Component {
         const isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); // ios终端
         if (isiOS) {
             this.isiOS = true;
-            await this.loadAli();
             this.autoFocusInst.textareaRef.classList.add('needsclick')
         } else if (isAndroid) {
             this.isAndroid = true;
             this.bindAndroidPickUp();
         }
+        await this.loadAli();
         this.inputBind();
         this.autoFocusInst.focus();
     }
@@ -175,9 +175,11 @@ class App extends React.Component {
                 this.$inputVideo.click();
             } // 双击触发file
         } else if (this.isAndroid){
-        if (window.android && window.android.nativeSelectVideo) { // app没有再代理input:Video/*的点击事件，直接调app接口，选完视频执行nativeGetVideoCallback
-            window.android.nativeSelectVideo('video');
-        }
+            if (window.android && window.android.nativeSelectVideo) { // app没有再代理input:Video/*的点击事件，直接调app接口，选完视频执行nativeGetVideoCallback
+                window.android.nativeSelectVideo('video');
+            } else {
+                this.$inputVideo.click();
+            }
         }
     }
     toSelectImg = () => {

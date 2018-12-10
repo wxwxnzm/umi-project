@@ -37,6 +37,7 @@ export default {
       console.log(query, 'qu')
       if (query.id) {
         const detail = yield call(query.from === 'app' ? getAppDetail : getWechatDetail, { id: query.id, token: query.token});
+        console.log(detail, 'detail')
         const d = getList(detail.content);
         data = {...data, ...d};
       }

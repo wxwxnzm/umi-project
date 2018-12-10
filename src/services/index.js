@@ -21,6 +21,11 @@ axios.interceptors.response.use(function (response) {
   });
   
 export const getAppDetail = async (params) => {
+    // test
+    return await axios.get('/eduboss/app/StudentCommentManageAppController/findReplyRecord4Teacher.do', {
+        params
+    });
+    // test
     // try {
         const {resultCode, resultMessage, data} =  await axios.get('/eduboss/app/StudentCommentManageAppController/findReplyRecord4Teacher.do', {
             params
