@@ -58,9 +58,7 @@ export default {
     ],
     proxy: {
       "/eduboss": {
-        // "target": "http://www.xuebangsoft.net/",
-        "target": "http://uat3.xuebangsoft.net/",
-        // "target": "http://192.168.2.175:8080/",
+        "target": "http://192.168.2.175:8080/",
         // "target": "http://192.168.2.195:8080/",
         "changeOrigin": true
       }

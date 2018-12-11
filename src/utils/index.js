@@ -60,11 +60,6 @@ export const historyBackWithAnimation = () => {
       window.history.back();
     }
   };
-export const SkinType = getUrlParams('SkinType') || '';
-function getUrlParams(paramName = '') {
-  let paramStr = window.location.search.slice(1);
-  return qs.parse(paramStr) ? qs.parse(paramStr)[paramName] : ''
-}
 
 export const loadJs  = (src) => {
   return new Promise(function(resolve, reject) {
